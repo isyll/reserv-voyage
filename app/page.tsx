@@ -1,9 +1,13 @@
 import Header from '@/components/layout/Header'
+import HeroHeader from '@/components/layout/HeroHeader'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
+    <>
       <Header />
-    </main>
+      <main>
+        <HeroHeader />
+      </main>
+    </>
   )
 }

@@ -6,4 +6,8 @@
   .navitem-btn {
     @apply font-bold hover:text-primary;
   }
+  .btn-reset {
+    @apply appearance-none border-none;
+    background-color: transparent;
+  }
 }

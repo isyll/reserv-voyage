@@ -5,7 +5,7 @@ export default function Logo() {
 
   return (
     <a href={siteUrl}>
-      <Image src="/logo.svg" width={150} height={150} alt="" />
+      <Image src="/logo.svg" width={150} height={150} alt="" priority />
     </a>
   )
 }

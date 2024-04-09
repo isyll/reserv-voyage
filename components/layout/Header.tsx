@@ -1,80 +1,71 @@
-import Logo from './Logo'
-import { ChevronDown } from 'lucide-react'
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
+'use client'
 
-export interface MenuItem {
-  url: string
-  name: string
-  subItems?: Array<{ url: string; name: string }>
+import Logo from './Logo'
+import { ChevronDown, ShoppingCart } from 'lucide-react'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
+import { useState } from 'react'
+import Navbar from './Navbar'
+import { cn } from '@/lib/utils'
+
+function Header() {
+  return (
+    <header className="w-full px-10 py-4 flex justify-between">
+      <Logo />
+      <Navbar className="self-center" />
+      <CurrencySwitcher className="self-center" />
+      <div className="rounded-full border border-slate-400 p-2">
+        <ShoppingCart />
+      </div>
+    </header>
+  )
 }
 
-const menuItems: MenuItem[] = [
+export interface Currency {
+  name: string
+  code: string
+}
+
+const currencies: Currency[] = [
   {
-    url: '#',
-    name: 'Accueil',
+    name: 'Euro',
+    code: 'EUR',
   },
   {
-    url: '#',
-    name: 'Liste',
-    subItems: [
-      {
-        url: '#',
-        name: 'Rechercher sur une carte',
-      },
-      {
-        url: '#',
-        name: 'Rechercher par le nom',
-      },
-    ],
+    name: 'Dollar',
+    code: 'USD',
   },
   {
-    url: '#',
-    name: 'Hotels',
-  },
-  {
-    url: '#',
-    name: 'Pages',
+    name: 'Franc CFA',
+    code: 'XOF',
   },
 ]
 
-export default function Header() {
-  const hasSubItems = (item: MenuItem) =>
-    item.subItems != undefined && item.subItems.length > 0
+function CurrencySwitcher({ className }: { className?: string }) {
+  // TODO: retrieve selected currency
+  const [currency, setCurrency] = useState(currencies[0])
+  className = className ?? ''
 
   return (
-    <div className="w-full p-10 flex justify-between">
-      <Logo />
-      <div className="flex gap-16 pr-10">
-        {menuItems.map((item, index) => {
-          if (hasSubItems(item)) {
-            return (
-              <HoverCard key={index}>
-                <HoverCardTrigger>
-                  <a key={index} href={item.url} className="navitem-btn">
-                    {item.name}
-                    <ChevronDown className="inline" />
-                  </a>
-                </HoverCardTrigger>
-                <HoverCardContent>
-                  {item.subItems?.map((sub, index) => (
-                    <div key={index} className="p-3">
-                      <a href={sub.url} className="navitem-btn">
-                        {sub.name}
-                      </a>
-                    </div>
-                  ))}
-                </HoverCardContent>
-              </HoverCard>
-            )
-          }
-
+    <HoverCard openDelay={0} closeDelay={0}>
+      <HoverCardTrigger className={cn('navitem-btn cursor-pointer', className)}>
+        {currency.code}
+        <ChevronDown className="inline" />
+      </HoverCardTrigger>
+      <HoverCardContent className="bg-white w-24">
+        {currencies.map((item, index) => {
           return (
-            <a key={index} href={item.url} className="navitem-btn">
-              {item.name}
-            </a>
+            <button
+              key={index}
+              className="btn-reset navitem-btn block p-2"
+              onClick={() => setCurrency(item)}
+            >
+              {item.code}
+            </button>
           )
         })}
-      </div>
-    </div>
+      </HoverCardContent>
+    </HoverCard>
   )
 }
+
+export default Header
