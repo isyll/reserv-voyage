@@ -3,7 +3,7 @@ const content = {
   text: 'Obtenez les meilleurs prix sur plus de 10.000 maisons partout au Sénégal',
 }
 
-function HeroHeader() {
+function Hero() {
   return (
     <div className="bg-hero-pattern bg-no-repeat bg-cover bg-center w-full flex justify-center">
       <div className="flex flex-col justify-center items-center p-hero">
@@ -14,4 +14,4 @@ function HeroHeader() {
   )
 }
 
-export default HeroHeader
+export default Hero

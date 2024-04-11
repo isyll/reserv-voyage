@@ -1,12 +1,12 @@
 import Header from '@/components/layout/Header'
-import HeroHeader from '@/components/layout/HeroHeader'
+import Hero from '@/components/layout/Hero'
 
 export default function Home() {
   return (
     <>
       <Header />
       <main>
-        <HeroHeader />
+        <Hero />
       </main>
     </>
   )
