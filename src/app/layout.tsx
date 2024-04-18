@@ -7,6 +7,9 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Révervez un voyage inoubliable',
   description: 'Révervez un voyage inoubliable',
+  icons: {
+    icon: 'Favicon-192x192.png',
+  },
 }
 
 export default function RootLayout({
