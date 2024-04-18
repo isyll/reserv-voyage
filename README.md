@@ -9,7 +9,7 @@ Tout d'abord il faut que vous ayez Docker installé sur votre système. Si ce n'
 Ensuite, tapez la commande suivante :
 
 ```bash
-docker compose up -d 
+docker compose up -d
 ```
 
 Une fois la commande précédente lancée, rendez-vous à l'adresse [http://127.0.0.1:3000](http://127.0.0.1:3000).
