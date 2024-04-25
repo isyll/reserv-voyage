@@ -1,7 +1,7 @@
 'use client'
 
 import Logo from './Logo'
-import { ChevronDown, ShoppingCart } from 'lucide-react'
+import { ChevronDown, ShoppingCart, UserRound } from 'lucide-react'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 import { useState } from 'react'
 import Navbar from './Navbar'
@@ -12,9 +12,14 @@ function Header() {
     <header className="w-full px-10 py-4 flex justify-between">
       <Logo />
       <Navbar className="self-center" />
-      <CurrencySwitcher className="self-center" />
-      <div className="rounded-full border border-slate-400 p-2">
-        <ShoppingCart />
+      <div className="flex gap-8">
+        <CurrencySwitcher className="self-center" />
+        <div className="rounded-full border border-slate-400 p-2">
+          <ShoppingCart />
+        </div>
+        <div className="rounded-full border border-slate-400 p-2">
+          <UserRound />
+        </div>
       </div>
     </header>
   )
