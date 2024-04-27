@@ -23,14 +23,25 @@ const popularDestinations = [
 function InputSelect({ placeholder, className }: Params) {
   const [hidden, setHidden] = useState(true)
   const [selectedDestination, setSelectedDestination] = useState('')
+  let blurTimeOut: NodeJS.Timeout
 
   const onInput = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     setSelectedDestination(value)
   }
+  const onBlur = () => {
+    clearTimeout(blurTimeOut)
+    // We hide the suggestions simply to hide the early triggered
+    // effect due to the onMouseDown event being used.
+    blurTimeOut = setTimeout(() => setHidden(true), 100)
+  }
+  const onClick = (name: string) => {
+    clearTimeout(blurTimeOut)
+    setSelectedDestination(name)
+  }
 
   return (
-    <div tabIndex={0} className={className} onBlur={() => setHidden(true)}>
+    <div tabIndex={0} className={className} onBlur={onBlur}>
       <input
         onFocus={() => setHidden(false)}
         value={selectedDestination}
@@ -52,7 +63,7 @@ function InputSelect({ placeholder, className }: Params) {
               <div className="text-sm cursor-pointer">
                 <button
                   className="btn-reset"
-                  onMouseDown={() => setSelectedDestination(dest.name)}
+                  onMouseDown={() => onClick(dest.name)}
                 >
                   {dest.name}
                 </button>
@@ -61,7 +72,7 @@ function InputSelect({ placeholder, className }: Params) {
                 {dest.subDestinations.map((subDest, i) => (
                   <div key={i} className="cursor-pointer pl-5">
                     <button
-                      onMouseDown={() => setSelectedDestination(subDest)}
+                      onMouseDown={() => onClick(subDest)}
                       className="btn-reset"
                     >
                       {subDest}
