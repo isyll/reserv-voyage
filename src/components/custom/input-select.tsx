@@ -6,8 +6,7 @@ import { Separator } from '../ui/separator'
 
 interface Params {
   placeholder: string
-  className: string
-  hidden?: boolean
+  className?: string
 }
 
 const popularDestinations = [
@@ -31,17 +30,15 @@ function InputSelect({ placeholder, className }: Params) {
   }
 
   return (
-    <div className={className}>
+    <div tabIndex={0} className={className} onBlur={() => setHidden(true)}>
       <input
         onFocus={() => setHidden(false)}
-        onBlur={() => setHidden(true)}
         value={selectedDestination}
         onChange={onInput}
         type="text"
-        className=" outline-none border-none bg-transparent"
+        className="outline-none border-none bg-transparent"
         placeholder={placeholder}
       />
-
       <ScrollArea
         className="h-72 w-48 rounded-md border bg-white shadow-md"
         hidden={hidden}
@@ -50,30 +47,30 @@ function InputSelect({ placeholder, className }: Params) {
           <h4 className="mb-4 text-sm font-medium leading-none">
             Destinations populaires
           </h4>
-          {popularDestinations.map((dest, index) => (
-            <>
-              <div
-                key={index}
-                className="text-sm cursor-pointer"
-                onClick={() => setSelectedDestination(dest.name)}
-              >
-                {dest.name}
+          {popularDestinations.map((dest, i) => (
+            <div key={i}>
+              <div className="text-sm cursor-pointer">
+                <button
+                  className="btn-reset"
+                  onMouseDown={() => setSelectedDestination(dest.name)}
+                >
+                  {dest.name}
+                </button>
               </div>
               <div>
-                {dest.subDestinations.map((subDest, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="cursor-pointer pl-5"
-                      onClick={() => setSelectedDestination(subDest)}
+                {dest.subDestinations.map((subDest, i) => (
+                  <div key={i} className="cursor-pointer pl-5">
+                    <button
+                      onMouseDown={() => setSelectedDestination(subDest)}
+                      className="btn-reset"
                     >
                       {subDest}
-                    </div>
-                  )
-                })}
+                    </button>
+                  </div>
+                ))}
               </div>
               <Separator className="my-2" />
-            </>
+            </div>
           ))}
         </div>
       </ScrollArea>
